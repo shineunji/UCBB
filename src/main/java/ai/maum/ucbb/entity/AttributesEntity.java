@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,6 +27,7 @@ import lombok.ToString;
 public class AttributesEntity implements Serializable {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Integer id;
 
@@ -34,7 +37,7 @@ public class AttributesEntity implements Serializable {
   @Column(name = "entityId")
   private Integer entityId;
 
-  @ManyToOne
+ /* @ManyToOne
   @JoinColumn(name = "entityId", insertable = false, updatable = false)
-  private EntitiesEntity entitiesEntity;
+  private EntitiesEntity entitiesEntity;*/
 }
