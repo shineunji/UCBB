@@ -18,14 +18,12 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "Dialogs1")
-public class dialogs implements Serializable {
-
+@Table(name = "Attributes")
+public class AttributesEntity implements Serializable {
+  @Column(name = "id")
+  private Integer id;
+  @Column(name = "attribute")
+  private String attribute;
   @Column(name = "entityId")
   private Integer entityId;
-  @Column(name = "attributeId")
-  private Integer attributeId;
-  @Column(name = "count")
-  private Integer count;
-
 }

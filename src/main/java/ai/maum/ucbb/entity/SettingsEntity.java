@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,10 +18,13 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "Entities")
-public class entities implements Serializable {
-  @Column(name = "id")
-  private Integer id;
-  @Column(name = "entity")
-  private String entity;
+@Table(name = "Settings")
+public class SettingsEntity implements Serializable {
+
+  @Column(name = "setting")
+  private String setting;
+  @Column(name = "value")
+  private String value;
+  @Column(name = "type")
+  private String type;
 }
