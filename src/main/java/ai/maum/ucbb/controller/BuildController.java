@@ -4,7 +4,6 @@ package ai.maum.ucbb.controller;
 import ai.maum.common.entity.Paging;
 import ai.maum.ucbb.entity.ConfigEntity;
 import ai.maum.ucbb.entity.LockEntity;
-import ai.maum.ucbb.service.BuildService;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -21,9 +20,6 @@ public class BuildController {
 
   static final Logger logger = LoggerFactory.getLogger(BuildController.class);
 
-  @Autowired
-  private BuildService buildService;
-
 
   @RequestMapping("/login")
   public String login(Model model) {
@@ -32,9 +28,9 @@ public class BuildController {
     return "/home";
   }
 
-  @RequestMapping("/systemProperty")
+ /* @RequestMapping("/systemProperty")
   public String systemProperty(Model model) {
-    model.addAttribute("list", (List<ConfigEntity>)buildService.getConfigList());
+    //model.addAttribute("list", (List<ConfigEntity>)buildService.getConfigList());
     return "ucbb/systemProperty";
   }
 
@@ -152,6 +148,6 @@ public class BuildController {
       System.out.println(e.toString());
     }
     return "ucbb/systemProperty";
-  }
+  }*/
 
 }

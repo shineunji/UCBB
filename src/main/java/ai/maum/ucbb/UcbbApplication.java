@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-@PropertySource("file:/home/ejshin/ucbb.conf")
+//@PropertySource("file:/home/ejshin/ucbb.conf")
 public class UcbbApplication  extends SpringBootServletInitializer {
 
 	@Override
