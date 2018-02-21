@@ -1,0 +1,96 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.springframework:springloaded:1.2.4.RELEASE") // 서버재시작 없이 파일 변경 반영
+		classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.0'
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+
+war {
+	baseName = 'springboot-gradle-demo'
+}
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+
+def grpcVersion = '1.8.0' // CURRENT_GRPC_VERSION
+
+dependencies {
+	compile "io.grpc:grpc-netty:${grpcVersion}"
+	compile "io.grpc:grpc-protobuf:${grpcVersion}"
+	compile "io.grpc:grpc-stub:${grpcVersion}"
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-tomcat')
+
+	compile('org.projectlombok:lombok:1.16.0')
+
+	compile group: 'com.google.http-client', name: 'google-http-client', version:'1.22.0'
+	compile group: 'com.google.http-client', name: 'google-http-client-jackson2', version:'1.22.0'
+    compile('mysql:mysql-connector-java:5.1.28')
+
+	providedRuntime('org.apache.tomcat.embed:tomcat-embed-jasper')
+	providedRuntime('javax.servlet:jstl') // JSTL 사용하기 위한 라이브러리
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat') // 외부 톰캣 사용을 위해 추가(war로 배포)
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+processResources {
+	filesMatching("**/application.yml") {
+//		expand(project.properties)
+	}
+}
+
+
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:3.3.0'
+	}
+	plugins {
+		grpc {
+			artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+		}
+	}
+	generateProtoTasks {
+		all()*.plugins {
+			grpc {
+				// To generate deprecated interfaces and static bindService method,
+				// turn the enable_deprecated option to true below:
+				option 'enable_deprecated=false'
+			}
+		}
+	}
+}
+
+// Inform IntelliJ projects about the generated code.
+apply plugin: 'idea'
+
+idea {
+	module {
+		// Not using generatedSourceDirs because of
+		// https://discuss.gradle.org/t/support-for-intellij-2016/15294/8
+		sourceDirs += file("${projectDir}/build/generated/source/proto/main/java");
+		sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc");
+	}
+}
+
+project.buildDir = 'target'
