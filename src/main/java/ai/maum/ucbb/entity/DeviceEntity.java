@@ -2,6 +2,7 @@ package ai.maum.ucbb.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,19 +20,22 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "Settings")
-public class SettingsEntity implements Serializable {
+@Table(name = "Device")
+public class DeviceEntity implements Serializable {
 
   @Id
-  @Column(name = "setting")
-  private String setting;
+  @Column(name = "deviceId")
+  private String deviceId;
 
-  @Column(name = "value")
-  private String value;
+  @Column(name = "count")
+  private Integer count;
 
-  @Column(name = "title")
-  private String title;
+  @Column(name = "status")
+  private String status;
 
-  @Column(name = "type")
-  private String type;
+  @Column(name = "createAt")
+  private Date createAt;
+
+  @Column(name = "updateAt")
+  private Date updateAt;
 }

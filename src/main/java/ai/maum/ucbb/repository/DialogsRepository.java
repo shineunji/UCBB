@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DialogsRepository extends JpaRepository<DialogsEntity, String> {
+public interface DialogsRepository extends JpaRepository<DialogsEntity, Integer> {
 
 }
