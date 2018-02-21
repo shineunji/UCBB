@@ -12,44 +12,51 @@
     <meta name="author" content="">
 
     <title>UCBB ADMIN</title>
+<%--
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="/skin/js/datepicker.min.js"></script>
-    <!-- Bootstrap core CSS -->
+--%>
+
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!-- Bootstrap core CSS --><%--
     <link rel="stylesheet" href="/skin/css/bootstrap.min.css">
     <link rel="stylesheet" href="/skin/css/datepicker.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/skin/css/dashboard.css">
+    <link rel="stylesheet" href="/skin/css/dashboard.css">--%>
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css">
+    <link rel="stylesheet" href="/skin/css/styles.css">
     <!-- Custom styles for this template -->
 </head>
 
 <body>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-        <a class="navbar-brand" href="/api/buildHistories">UCBB</a>
-    </nav>
-</header>
 
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link<c:if test="${param.menu == 'systemProperty'}"> active</c:if>"
-                       href="<c:url value="/api/systemProperty"/>">UCBB System Property 설정<c:if
-                            test="${param.menu == 'systemProperty'}"><span
-                            class="sr-only">(current)</span> </c:if></a></li>
-                <li class="nav-item">
-                    <a class="nav-link<c:if test="${param.menu == 'buildList'}"> active</c:if>"
-                       href="<c:url value="/api/buildList"/>">Build 진행 현황<c:if
-                            test="${param.menu == 'systemProperty'}"><span
-                            class="sr-only">(current)</span> </c:if></a></li>
-                <li class="nav-item">
-                    <a class="nav-link<c:if test="${param.menu == 'buildHistories'}"> active</c:if>"
-                       href="<c:url value="/api/buildHistories"/>">Build 이력 조회<c:if
-                            test="${param.menu == 'systemProperty'}"><span
-                            class="sr-only">(current)</span> </c:if></a>
-                </li>
-            </ul>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
+          <span class="android-title mdl-layout-title">
+            대화<%--<img class="android-logo-image" src="images/android-logo.png">--%>
+          </span>
+            <!-- Add spacer, to align navigation to the right in desktop -->
+            <div class="android-header-spacer mdl-layout-spacer"></div>
+
+        </div>
+    </div>
+
+    <div class="android-drawer mdl-layout__drawer">
+        <span class="mdl-layout-title">
+          대화
+        </span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Dashboard</a>
+            <a class="mdl-navigation__link" href="">대화 Trigger 설정</a>
+            <a class="mdl-navigation__link" href="">Entity-Attribute 관리</a>
+            <a class="mdl-navigation__link" href="">Entity-Attribute 업데이트</a>
         </nav>
+    </div>
 
-        <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+    <div class="android-content mdl-layout__content">

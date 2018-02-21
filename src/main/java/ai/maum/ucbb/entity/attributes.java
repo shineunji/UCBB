@@ -2,23 +2,28 @@ package ai.maum.ucbb.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Data
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class ConfigEntity implements Serializable {
-
+@Table(name = "Attributes")
+public class attributes implements Serializable {
+  @Column(name = "id")
   private Integer id;
-  private String code;
-  private String value;
-  private String type;
-  private String desc;
+  @Column(name = "attribute")
+  private String attribute;
+  @Column(name = "entityId")
+  private Integer entityId;
 }

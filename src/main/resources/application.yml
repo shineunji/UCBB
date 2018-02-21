@@ -9,7 +9,7 @@ spring:
 
     jpa:
         hibernate:
-            ddl-auto: none
+            ddl-auto: create
             dialect: org.hibernate.dialect.MySQL5Dialect
             naming:
               physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

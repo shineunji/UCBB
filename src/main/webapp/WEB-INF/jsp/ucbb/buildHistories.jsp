@@ -127,7 +127,7 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
         <tr>
             <th>Request at</th>
