@@ -1,0 +1,8 @@
+spring:
+    mvc:
+        view:
+            prefix: /WEB-INF/jsp/
+            suffix: .jsp
+        resources:
+            mapping: /skin/**
+            location: /skin/

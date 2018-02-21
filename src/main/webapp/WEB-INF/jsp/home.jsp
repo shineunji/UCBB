@@ -12,14 +12,14 @@
     <link rel="stylesheet" type="text/css" href="/skin/css/main.css"/>
 </head>
 <body>
-<button _ngcontent-jcc-110="" color="primary"
-        md-raised-button="" type="submit" class="md-primary" onclick="location='/api/buildList'">
-    <span class="md-button-wrapper">Sign-In</span>
-    <div class="md-button-ripple" md-ripple=""
-         mdripplebackgroundcolor="rgba(0, 0, 0, 0)">
-        <div class="md-ripple-background"></div>
-    </div>
-    <div class="md-button-focus-overlay"></div>
-</button>
+    <button _ngcontent-jcc-110="" color="primary"
+            md-raised-button="" type="submit" class="md-primary" onclick="location='/api/buildList'">
+        <span class="md-button-wrapper">Sign-In</span>
+        <div class="md-button-ripple" md-ripple=""
+             mdripplebackgroundcolor="rgba(0, 0, 0, 0)">
+            <div class="md-ripple-background"></div>
+        </div>
+        <div class="md-button-focus-overlay"></div>
+    </button>
 </body>
 </html>
