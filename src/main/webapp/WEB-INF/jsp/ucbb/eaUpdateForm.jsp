@@ -4,7 +4,24 @@
 <jsp:include page="../common/includeTop.jsp" flush="true">
     <jsp:param name="menu" value="buildHistories"/>
 </jsp:include>
-<h2>Build 상세 조회</h2>
+
+
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a class="nav-link active"
+               href="<c:url value="/eaUpdateForm"/>">Entity 업데이트 등록<span
+                    class="sr-only">(current)</span></a></li>
+        <li class="nav-item">
+            <a class="nav-link"
+               href="<c:url value="/eaUpdateStatus"/>">Entity 업데이트 현황</a></li>
+    </ul>
+</nav>
+
+
+<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+
+<toolbar><h2 class="title">Entity 업데이트 등록</h2></toolbar>
 <div class="table-responsive">
 
 
@@ -249,7 +266,8 @@
             </div>
         </app-table>
     </section>
-
+</div>
+</main>
 <%@ include file="../common/includeBottom.jsp" %>
 
 

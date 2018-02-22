@@ -36,66 +36,17 @@
   }
 
 </script>
-<h3>UCBB System Property 설정</h3>
+
+<main role="main" class="col-sm-9 col-md-10 pt-3">
+<toolbar><h2 class="title">대화 Trigger 설정</h2></toolbar>
 
 <div class="table-responsive">
-    <div class="row mb-2">
-        <div class="col-md-6">
-            <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                <div class="card-body d-flex flex-column align-items-start">
-                    <h3 class="mb-0">
-                        Property 등록
-                    </h3>
-                    <form id="SYSTEM_PROPERTY_FORM" name="SYSTEM_PROPERTY_FORM"
-                          action="<c:url value="/api/insertProperty"/>">
-                        <input type="hidden" id="id" name="id">
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="code">Code</label>
-                                <input type="text" class="form-control" id="code" name="code"
-                                       placeholder="Code" value="" required="">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="value">Value</label>
-                                <input type="text" class="form-control" id="value" name="value"
-                                       placeholder="Value" value="" required="">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="inputType">Type</label>
-                                <div class="input-group" id="inputType">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type"
-                                               id="id_Int" value="Int">
-                                        <label class="form-check-label"
-                                               for="inlineRadio1">Int</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type"
-                                               id="id_String" value="String">
-                                        <label class="form-check-label"
-                                               for="inlineRadio2">String</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="jumbotron mt-3">
+        <p class="lead">거부 의사에 따른 대화 Trigger 설정 방법</p>
 
-
-                        <div class="form-row align-items-center">
-                            <div class="col-9 col-auto my-1">
-                                <label class="mr-sm-2" for="desc">Description</label>
-                                <input type="text" class="form-control" id="desc" name="desc"
-                                       placeholder="Description" required="">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">등록</button>
-
-                    </form>
-                </div>
-            </div>
-        </div>
+        <p class="lead">대화 거부 의사를 밝힌 Device의 횟수에 따라 대화 재실행까지의 기간을 설정할 수 있습니다.</p>
+        <br>예: 1회 대화 거부 의사 device를 1day로 설정 시 의사 표시 시점으로부터 1일(24시간) 동안 대화를 시도하지 않음</p>
     </div>
-
 
     <div class="col-6 placeholder">
 
@@ -107,15 +58,15 @@
     </h3>
 
     <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Code</th>
-            <th scope="col">Value</th>
-            <th scope="col">Type</th>
-            <th scope="col">Description</th>
-            <th scope="col">Modift/Delete</th>
-        </tr>
-        </thead>
+        <%--        <thead>
+                <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Modift/Delete</th>
+                </tr>
+                </thead>--%>
         <tbody>
 
         <c:choose>
@@ -168,12 +119,12 @@
                         </td>
                         <td style="width: 150px">
                             <button type="button" class="btn btn-info"
-                                    onClick="updateConfig(${i.index})">수정
+                                    onClick="updateConfig(${i.index})">저장
                             </button>
-
-                            <button type="button" class="btn btn-danger"
-                                    onclick="deleteConfig(${data.id})">삭제
-                            </button>
+                                <%--
+                                                            <button type="button" class="btn btn-danger"
+                                                                    onclick="deleteConfig(${data.id})">삭제
+                                                            </button>--%>
                         </td>
                     </tr>
                 </c:forEach>
@@ -183,4 +134,5 @@
     </table>
 
 </div>
+</main>
 <%@ include file="../common/includeBottom.jsp" %>

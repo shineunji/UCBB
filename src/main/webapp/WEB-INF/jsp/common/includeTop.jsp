@@ -18,11 +18,11 @@
     --%>
 
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <!-- Bootstrap core CSS --><%--
+    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/skin/css/bootstrap.min.css">
     <link rel="stylesheet" href="/skin/css/datepicker.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/skin/css/dashboard.css">--%>
+    <link rel="stylesheet" href="/skin/css/dashboard.css">
 
     <!-- Page styles -->
     <link rel="stylesheet"
@@ -53,10 +53,10 @@
           대화
         </span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Dashboard</a>
-            <a class="mdl-navigation__link" href="">대화 Trigger 설정</a>
-            <a class="mdl-navigation__link" href="">Entity-Attribute 관리</a>
-            <a class="mdl-navigation__link" href="">Entity-Attribute 업데이트</a>
+            <a class="mdl-navigation__link" href="/dashboard">Dashboard</a>
+            <a class="mdl-navigation__link" href="/triggerSetting">대화 Trigger 설정</a>
+            <a class="mdl-navigation__link" href="/eaList">Entity-Attribute 관리</a>
+            <a class="mdl-navigation__link" href="/eaUpdateStatus">Entity-Attribute 업데이트</a>
         </nav>
     </div>
 

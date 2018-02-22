@@ -60,14 +60,24 @@
     });
   });
 </script>
-<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-    <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">Build 이력 조회</span>
-        <div class="mdl-layout-spacer"></div>
-    </div>
-</header>
 
-<h1>Build 이력 조회</h1>
+
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a class="nav-link"
+               href="<c:url value="/eaUpdateForm"/>">Entity 업데이트 등록</a></li>
+        <li class="nav-item">
+            <a class="nav-link active"
+               href="<c:url value="/eaUpdateStatus"/>">Entity 업데이트 현황<span
+                    class="sr-only">(current)</span></a></li>
+    </ul>
+</nav>
+
+
+<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+
+<toolbar><h2 class="title">Entity 업데이트 현황</h2></toolbar>
 <div class="row mb-2">
     <div class="col-md-9">
         <div class="card flex-md-row mb-2 box-shadow h-md-250">
@@ -76,22 +86,10 @@
                 <form class="form-inline" id="HISTORIES_LIST_FORM" name="HISTORIES_LIST_FORM"
                       action="<c:url value="/api/buildHistories"/>">
                     <input type="hidden" id="page_no" name="page_no" value="${paging.pageNo}"/>
-                    <input type="hidden" id="skill_uuid" name="skill_uuid" value=""/>
-                    <div class="form-group mb-2">
-
-                        <label for="type" class="sr-only">Search</label>
-                        <select id="type" name="type" class="form-control">
-                            <option value="SKILL_UUID">Skill UUID</option>
-                            <option value="SKILL_NAME">Skill name</option>
-                            <option value="MODEL_UUID">Model UUID</option>
-                            <option value="MODEL_NAME">Model name</option>
-                        </select>
-
-                    </div>
                     <div class="form-group mx-sm-3 mb-2">
-                        <label for="keyword" class="sr-only">keyword</label>
+                        <label for="keyword" class="sr-only">Search</label>
                         <input class="form-control" id="keyword" name="keyword" type="text"
-                               placeholder="Search...">
+                               placeholder="keyword...">
                     </div>
                     <div class="form-group mx-sm-3 mb-2">
                         <label class="mr-sm-2" class="sr-only">date</label>
@@ -132,17 +130,14 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <table class="table">
         <thead>
         <tr>
-            <th>Request at</th>
-            <th>Agent name</th>
-            <th>Agent UUID</th>
-            <th>Skill Name</th>
-            <th>Skill UUID</th>
-            <th>Assist Status</th>
-            <th>Assist out code</th>
-            <th>Assist out msg</th>
+            <th>업데이트 예약일</th>
+            <th>업데이트 실행일</th>
+            <th>Entity count</th>
+            <th>Status</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -173,18 +168,14 @@
                         </td>
                         <td><a
                         >${data.skillName}</a></td>
-                        <td><a
-                        >${data.skillUuid}</a>
+                        <td><button type="button" class="btn btn-info"
+                                    onClick="updateConfig(${i.index})">취소
+                        </button>
+                            <button type="button" class="btn btn-info"
+                                    onClick="updateConfig(${i.index})">재예약
+                            </button>
                         </td>
-                        <td><a
-                        >${data.assistStatus}</a>
-                        </td>
-                        <td><a
-                        >${data.assistOutCode}</a>
-                        </td>
-                        <td><a
-                        >${data.assistOutMsg}</a>
-                        </td>
+
                     </tr>
                 </c:forEach>
             </c:otherwise>
@@ -204,3 +195,4 @@
 <div class="rolling"
      hidden=""></div>
 <%@ include file="../common/includeBottom.jsp" %>
+</main>

@@ -19,7 +19,9 @@
   }
 
 </script>
-<h2>Build 진행 현황</h2>
+
+<main role="main" class="col-sm-9 col-md-10 pt-3">
+<toolbar><h2 class="title">대화 Trigger 설정</h2></toolbar>
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -72,5 +74,5 @@
         <jsp:param name="finalPageNo" value="${paging.finalPageNo}"/>
     </jsp:include>
 </div>
-
+</main>
 <%@ include file="../common/includeBottom.jsp" %>

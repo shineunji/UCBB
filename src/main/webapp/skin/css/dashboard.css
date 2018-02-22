@@ -3,20 +3,32 @@
  */
 
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
-body {
-  padding-top: 3.5rem;
-}
+
 
 /*
  * Typography
  */
 
-h1 {
-  padding-bottom: 9px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #eee;
-}
+toolbar {
+  min-height: 64px;
+  background-color: #fff;
+  border-bottom: 1.1px solid #d3d3d3;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 16px;
+  flex-direction: column;
 
+
+}
+h2.title {
+
+  font-weight: 400;
+  letter-spacing: .005em;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 9px 0 0 4px;
+}
 /*
  * Sidebar
  */
