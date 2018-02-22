@@ -3,8 +3,13 @@ package ai.maum.ucbb.controller;
 
 import ai.maum.ucbb.entity.EntitiesEntity;
 import ai.maum.ucbb.entity.SettingsEntity;
+import ai.maum.ucbb.entity.UpdateStatusEntity;
+import ai.maum.ucbb.service.AttributesService;
 import ai.maum.ucbb.service.EntitiesService;
 import ai.maum.ucbb.service.SettingsService;
+import ai.maum.ucbb.service.UpdateStatusService;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import org.slf4j.Logger;
@@ -27,6 +32,12 @@ public class AdminController {
 
   @Autowired
   private EntitiesService entitiesService;
+
+  @Autowired
+  private AttributesService attributesService;
+
+  @Autowired
+  private UpdateStatusService updateStatusService;
 
   @RequestMapping("/login")
   public String login(Model model) {
@@ -74,7 +85,7 @@ public class AdminController {
     try {
       SettingsEntity param = new SettingsEntity();
       param.setSetting(requestParams.get("setting"));
-      param.setValue(requestParams.get("vlaue"));
+      param.setValue(requestParams.get("value"));
       param.setTitle(requestParams.get("title"));
       param.setType(requestParams.get("type"));
 
@@ -102,7 +113,7 @@ public class AdminController {
     try {
       SettingsEntity param = new SettingsEntity();
       param.setSetting(requestParams.get("setting"));
-      param.setValue(requestParams.get("vlaue"));
+      param.setValue(requestParams.get("value"));
 
       settingsService.updateSetting(param);
 
@@ -142,8 +153,11 @@ public class AdminController {
     logger.info("======= call request :: /eaList =======");
 
     try {
+      EntitiesEntity param = new EntitiesEntity();
+      param.setSearchKeyword(requestParams.get("searchKeyword"));
 
-
+      Page<EntitiesEntity> result = entitiesService.findEntitiesList(param);
+      model.addAttribute("result", result);
     }catch (Exception e){
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
@@ -156,8 +170,9 @@ public class AdminController {
     logger.info("======= call request :: /eaUpdateForm =======");
 
     try {
-
-
+      /*
+      *  grcp 연동 부분
+      * */
     }catch (Exception e){
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
@@ -165,19 +180,55 @@ public class AdminController {
     return "/ucbb/eaUpdateForm";
   }
 
-  @RequestMapping("/eaUpdateStatus")
-  public String eaUpdateStatus(@RequestParam HashMap<String, String> requestParams, Model model) {
-    logger.info("======= call request :: /eaUpdateStatus =======");
+  @RequestMapping("/eaUpdateForm/execute")
+  public String eaUpdateFormExcute(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /eaUpdateForm/execute =======");
 
     try {
+      /*
+      *  grcp 연동 부분
+      * */
 
-
+      model.addAttribute("result", findUpdateStatusList(requestParams));
     }catch (Exception e){
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
     }
     return "/ucbb/eaUpdateStatus";
   }
+
+  @RequestMapping("/eaUpdateStatus")
+  public String eaUpdateStatus(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /eaUpdateStatus =======");
+
+    try {
+      model.addAttribute("result", findUpdateStatusList(requestParams));
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/ucbb/eaUpdateStatus";
+  }
+
+  public Page<UpdateStatusEntity> findUpdateStatusList(HashMap<String, String> requestParams) {
+    UpdateStatusEntity param = new UpdateStatusEntity();
+    param.setSearchKeyword(requestParams.get("searchKeyword"));
+    param.setStartDate(strToDate(requestParams.get("startDate")));
+    param.setEndDate(strToDate(requestParams.get("endDate")));
+
+    Page<UpdateStatusEntity> result = updateStatusService.findUpdateStatusList(param);
+
+    return result;
+  }
+
+  public Date strToDate(String s) {
+    try{
+      return new SimpleDateFormat("yyyy-MM-dd").parse(s);
+    }catch (Exception e){
+      return null;
+    }
+  }
+
 
 
 
