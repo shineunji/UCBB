@@ -2,19 +2,28 @@ package ai.maum.ucbb.controller;
 
 
 import ai.maum.ucbb.entity.EntitiesEntity;
+import ai.maum.ucbb.entity.SettingsEntity;
 import ai.maum.ucbb.service.EntitiesService;
+import ai.maum.ucbb.service.SettingsService;
+import java.util.HashMap;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminController {
 
   static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+
+  @Autowired
+  private SettingsService settingsService;
 
   @Autowired
   private EntitiesService entitiesService;
@@ -25,6 +34,99 @@ public class AdminController {
     model.addAttribute("message", "Hello, World!!!");
     return "/home";
   }
+
+
+  /********************************************************************************************************************/
+  /*********************************** Trigger Setting  ***************************************************************/
+  /********************************************************************************************************************/
+  @RequestMapping("/triggerSetting")
+  public String triggerSetting(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /triggerSetting =======");
+
+    try {
+
+      List<SettingsEntity> result = settingsService.getSettingsList();
+      model.addAttribute("result", result);
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/triggerSetting";
+  }
+
+  @RequestMapping("/triggerSetting/insert")
+  public String insertSetting(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /triggerSetting/insert =======");
+
+    try {
+      SettingsEntity param = new SettingsEntity();
+      param.setSetting(requestParams.get("setting"));
+      param.setValue(requestParams.get("vlaue"));
+      param.setTitle(requestParams.get("title"));
+      param.setType(requestParams.get("type"));
+
+      boolean checkExists = settingsService.checkExists(param);
+
+      if(checkExists){
+        throw new Exception("Already existing setting :: " + requestParams.get("setting"));
+      }else{
+        settingsService.insertSetting(param);
+        List<SettingsEntity> result = settingsService.getSettingsList();
+        model.addAttribute("result", result);
+      }
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/triggerSetting";
+  }
+
+  /********************************************************************************************************************/
+  /*********************************** Entity Agent *******************************************************************/
+  /********************************************************************************************************************/
+  @RequestMapping("/eaList")
+  public String eaList(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /eaList =======");
+
+    try {
+
+
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/eaList";
+  }
+
+  @RequestMapping("/eaUpdateForm")
+  public String eaUpdateForm(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /eaUpdateForm =======");
+
+    try {
+
+
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/eaUpdateForm";
+  }
+
+  @RequestMapping("/eaUpdateStatus")
+  public String eaUpdateStatus(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /eaUpdateStatus =======");
+
+    try {
+
+
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/eaUpdateStatus";
+  }
+
+
 
  /* @RequestMapping("/systemProperty")
   public String systemProperty(Model model) {
