@@ -1,8 +1,12 @@
 package ai.maum.ucbb.controller;
 
 
+import ai.maum.ucbb.entity.EntitiesEntity;
+import ai.maum.ucbb.service.EntitiesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +16,8 @@ public class AdminController {
 
   static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+  @Autowired
+  private EntitiesService entitiesService;
 
   @RequestMapping("/login")
   public String login(Model model) {

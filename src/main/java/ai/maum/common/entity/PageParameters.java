@@ -1,6 +1,7 @@
 package ai.maum.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 
 @Getter
 @Setter
-public class PageParameters {
+public class PageParameters implements Serializable{
 
   @Transient
   private int pageSize;
