@@ -5,35 +5,46 @@
     <jsp:param name="menu" value="buildHistories"/>
 </jsp:include>
 
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-    <div class="mdl-cell mdl-cell--1-col">1</div>
-</div>
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col">4</div>
-    <div class="mdl-cell mdl-cell--4-col">4</div>
-    <div class="mdl-cell mdl-cell--4-col">4</div>
-</div>
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--6-col">6</div>
-    <div class="mdl-cell mdl-cell--4-col">4</div>
-    <div class="mdl-cell mdl-cell--2-col">2</div>
-</div>
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">6 (8 tablet)</div>
-    <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet">4 (6 tablet)</div>
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">2 (4 phone)</div>
-</div>
+<main class="mdl-layout__content">
+    <div class="mdl-grid portfolio-max-width">
+
+        <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Process : total</h2>
+            </div>
+            <div class="mdl-grid portfolio-copy">
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#starks-panel" class="mdl-tabs__tab is-active">LG U+ 대화</a>
+                    </div>
+
+                    <div class="mdl-tabs__panel is-active" id="starks-panel">
+                        <ul>
+                            <div id="p1" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                        </ul>
+                    </div>
+                    <div class="mdl-tabs__panel" id="lannisters-panel">
+                        <ul>
+                            <li>Tywin</li>
+                            <li>Cersei</li>
+                            <li>Jamie</li>
+                            <li>Tyrion</li>
+                        </ul>
+                    </div>
+                    <div class="mdl-tabs__panel" id="targaryens-panel">
+                        <ul>
+                            <li>Viserys</li>
+                            <li>Daenerys</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</main>
+
 
 
 <%@ include file="../common/includeBottom.jsp" %>

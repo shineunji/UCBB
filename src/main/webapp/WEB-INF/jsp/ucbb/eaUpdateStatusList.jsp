@@ -60,7 +60,12 @@
     });
   });
 </script>
-
+<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+    <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Build 이력 조회</span>
+        <div class="mdl-layout-spacer"></div>
+    </div>
+</header>
 
 <h1>Build 이력 조회</h1>
 <div class="row mb-2">

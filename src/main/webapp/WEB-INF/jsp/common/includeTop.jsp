@@ -12,10 +12,10 @@
     <meta name="author" content="">
 
     <title>UCBB ADMIN</title>
-<%--
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-    <script src="/skin/js/datepicker.min.js"></script>
---%>
+    <%--
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+        <script src="/skin/js/datepicker.min.js"></script>
+    --%>
 
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <!-- Bootstrap core CSS --><%--
@@ -25,25 +25,26 @@
     <link rel="stylesheet" href="/skin/css/dashboard.css">--%>
 
     <!-- Page styles -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css">
+    <link rel="stylesheet" href="/skin/css/material.min.css" />
     <link rel="stylesheet" href="/skin/css/styles.css">
     <!-- Custom styles for this template -->
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
-
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
     <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row">
-          <span class="android-title mdl-layout-title">
-            대화<%--<img class="android-logo-image" src="images/android-logo.png">--%>
-          </span>
-            <!-- Add spacer, to align navigation to the right in desktop -->
+            <span class="android-title mdl-layout-title">대화</span>
             <div class="android-header-spacer mdl-layout-spacer"></div>
-
         </div>
     </div>
 
