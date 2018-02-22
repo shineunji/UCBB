@@ -35,6 +35,19 @@ public class AdminController {
     return "/home";
   }
 
+  @RequestMapping("/dashboard")
+  public String dashboard(Model model) {
+    logger.info("======= call request :: /dashboard =======");
+
+    try {
+
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/ucbb/dashboard";
+  }
+
 
   /********************************************************************************************************************/
   /*********************************** Trigger Setting  ***************************************************************/
@@ -51,7 +64,7 @@ public class AdminController {
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
     }
-    return "/triggerSetting";
+    return "/ucbb/triggerSetting";
   }
 
   @RequestMapping("/triggerSetting/insert")
@@ -71,6 +84,7 @@ public class AdminController {
         throw new Exception("Already existing setting :: " + requestParams.get("setting"));
       }else{
         settingsService.insertSetting(param);
+
         List<SettingsEntity> result = settingsService.getSettingsList();
         model.addAttribute("result", result);
       }
@@ -78,7 +92,46 @@ public class AdminController {
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
     }
-    return "/triggerSetting";
+    return "/ucbb/triggerSetting";
+  }
+
+  @RequestMapping("/triggerSetting/update")
+  public String updateSetting(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /triggerSetting/update =======");
+
+    try {
+      SettingsEntity param = new SettingsEntity();
+      param.setSetting(requestParams.get("setting"));
+      param.setValue(requestParams.get("vlaue"));
+
+      settingsService.updateSetting(param);
+
+      List<SettingsEntity> result = settingsService.getSettingsList();
+      model.addAttribute("result", result);
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/ucbb/triggerSetting";
+  }
+
+  @RequestMapping("/triggerSetting/delete")
+  public String deleteSetting(@RequestParam HashMap<String, String> requestParams, Model model) {
+    logger.info("======= call request :: /triggerSetting/delete =======");
+
+    try {
+      SettingsEntity param = new SettingsEntity();
+      param.setSetting(requestParams.get("setting"));
+
+      settingsService.deleteSetting(param);
+
+      List<SettingsEntity> result = settingsService.getSettingsList();
+      model.addAttribute("result", result);
+    }catch (Exception e){
+      e.printStackTrace();
+      model.addAttribute("message", e.getMessage());
+    }
+    return "/ucbb/triggerSetting";
   }
 
   /********************************************************************************************************************/
@@ -95,7 +148,7 @@ public class AdminController {
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
     }
-    return "/eaList";
+    return "/ucbb/eaList";
   }
 
   @RequestMapping("/eaUpdateForm")
@@ -109,7 +162,7 @@ public class AdminController {
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
     }
-    return "/eaUpdateForm";
+    return "/ucbb/eaUpdateForm";
   }
 
   @RequestMapping("/eaUpdateStatus")
@@ -123,7 +176,7 @@ public class AdminController {
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
     }
-    return "/eaUpdateStatus";
+    return "/ucbb/eaUpdateStatus";
   }
 
 
