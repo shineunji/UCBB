@@ -203,3 +203,62 @@ insert into Attributes(`id`,`attribute`,`entityId`)values(149,'attribute150',19)
 insert into Attributes(`id`,`attribute`,`entityId`)values(150,'attribute151',19);
 insert into Attributes(`id`,`attribute`,`entityId`)values(151,'attribute152',19);
 
+
+insert into Settings(`setting`,`value`,`title`,`type`)values('setting1','value1','title2','type3');
+insert into Settings(`setting`,`value`,`title`,`type`)values('setting2','value2','title3','type4');
+insert into Settings(`setting`,`value`,`title`,`type`)values('setting3','value3','title4','type5');
+insert into Settings(`setting`,`value`,`title`,`type`)values('setting4','value4','title5','type6');
+insert into Settings(`setting`,`value`,`title`,`type`)values('setting5','value5','title6','type7');
+insert into Settings(`setting`,`value`,`title`,`type`)values('setting6','value6','title7','type8');
+
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(0,now(),now(),5,'C');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(1,now(),now(),5,'R');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(2,now(),now(),5,'R');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(3,now(),now(),5,'R');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(4,now(),now(),5,'C');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(5,now(),now(),5,'C');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(6,now(),now(),5,'C');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(7,now(),now(),5,'R');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(8,now(),now(),5,'R');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(9,now(),now(),5,'R');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(10,now(),now(),5,'R');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(11,now(),now(),5,'C');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(12,now(),now(),5,'C');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(13,now(),now(),5,'F');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(14,now(),now(),5,'F');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(15,now(),now(),5,'F');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(16,now(),now(),5,'F');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(17,now(),now(),5,'C');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(18,now(),now(),5,'C');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(19,now(),now(),5,'F');
+insert into UpdateStatus(`id`,`createAt`,`excuteAt`,`entityCount`,`statusCode`)values(20,now(),now(),5,'F');
+
+
+
+
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(3,3,'name4');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(4,4,'name5');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(5,0,'name1');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(6,1,'name2');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(7,2,'name3');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(8,3,'name4');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(9,4,'name5');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(10,0,'name1');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(11,1,'name2');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(12,2,'name3');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(13,3,'name4');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(14,4,'name5');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(15,0,'name1');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(16,1,'name2');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(17,2,'name3');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(18,3,'name4');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(19,4,'name5');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(20,0,'name1');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(21,1,'name2');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(22,2,'name3');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(23,3,'name4');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(24,4,'name5');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(25,0,'name1');
+insert into UpdateEntities(`id`,`updateStatusId`,`name`)values(26,1,'name2');
+
+

@@ -1,5 +1,6 @@
 package ai.maum.ucbb.entity;
 
+import ai.maum.common.entity.PageParameters;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,7 +26,7 @@ import lombok.ToString;
 @ToString
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "UpdateStatus")
-public class UpdateStatusEntity implements Serializable{
+public class UpdateStatusEntity extends PageParameters implements Serializable{
 
   @Id
   @Column(name = "id")
@@ -44,5 +46,14 @@ public class UpdateStatusEntity implements Serializable{
 
   @OneToMany(mappedBy = "updateStatusId", orphanRemoval = true, cascade = CascadeType.ALL)
   private List<UpdateEntitiesEntity> UpdateEntitiesEntity;
+
+  @Transient
+  private Date startDate;
+
+  @Transient
+  private Date endDate;
+
+  @Transient
+  private String searchKeyword;
 
 }
