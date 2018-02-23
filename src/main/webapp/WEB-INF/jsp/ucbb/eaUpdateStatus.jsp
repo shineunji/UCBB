@@ -6,27 +6,12 @@
 </jsp:include>
 
 <script type="text/javascript">
-  function goPage(page) {
-    var frm = document.HISTORIES_LIST_FORM;
-    frm.action = "<c:url value="/api/buildHistories"/>";
-    frm.page_no.value = page;
-    frm.submit();
-  }
+  var attrArr = [];
 
-  function goView(id) {
-    var frm = document.HISTORIES_LIST_FORM;
-    frm.action = "<c:url value="/api/buildView"/>";
-    frm.skill_uuid = id;
-    frm.submit();
-  }
-
-</script>
-
-<script type="text/javascript">
   $(document).ready(function () {
     //달력 - 시작일
     $('#startDate').datepicker({
-      format: 'yyyy.mm.dd',
+      format: 'yyyy-mm-dd',
       changeMonth: true,
       changeYear: true,
       onSelect: function (dateText, inst) {
@@ -43,7 +28,7 @@
     });
     // 달력 - 종료일
     $('#endDate').datepicker({
-      format: 'yyyy.mm.dd',
+      format: 'yyyy-mm-dd',
       changeMonth: true,
       changeYear: true,
       onSelect: function (dateText, inst) {
@@ -58,7 +43,37 @@
         }
       }
     });
+
+    <c:forEach var="data" items="${result}">
+        var tempArr = [];
+        <c:forEach var="data2" items="${data.updateEntitiesEntities}">
+            var json = new Object();
+            json.id = "${data2.id}";
+            json.updateStatusId = "${data2.updateStatusId}";
+            json.name = "${data2.name}";
+            tempArr.push(json);
+        </c:forEach>
+        attrArr.push(tempArr);
+    </c:forEach>
   });
+
+  function goPage(page) {
+    var frm = document.STATUS_LIST_FORM;
+    frm.action = "<c:url value="/eaUpdateStatus"/>";
+    frm.page_no.value = page;
+    frm.submit();
+  }
+
+  function goView(id) {
+    var frm = document.HISTORIES_LIST_FORM;
+    frm.action = "<c:url value="/api/buildView"/>";
+    frm.skill_uuid = id;
+    frm.submit();
+  }
+
+  function popUpdateEntities(idx) {
+    console.log(attrArr[idx]);
+  }
 </script>
 
 
@@ -77,122 +92,141 @@
 
 <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
 
-<toolbar><h2 class="title">Entity 업데이트 현황</h2></toolbar>
-<div class="row mb-2">
-    <div class="col-md-9">
-        <div class="card flex-md-row mb-2 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
+    <toolbar><h2 class="title">Entity 업데이트 현황</h2></toolbar>
+    <div class="row mb-2">
+        <div class="col-md-9">
+            <div class="card flex-md-row mb-2 box-shadow h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
 
-                <form class="form-inline" id="HISTORIES_LIST_FORM" name="HISTORIES_LIST_FORM"
-                      action="<c:url value="/api/buildHistories"/>">
-                    <input type="hidden" id="page_no" name="page_no" value="${paging.pageNo}"/>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label for="keyword" class="sr-only">Search</label>
-                        <input class="form-control" id="keyword" name="keyword" type="text"
-                               placeholder="keyword...">
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label class="mr-sm-2" class="sr-only">date</label>
+                    <form class="form-inline" id="STATUS_LIST_FORM" name="STATUS_LIST_FORM"
+                          action="<c:url value="/eaUpdateStatus"/>">
+                        <input type="hidden" id="page_no" name="page_no" value="1"/>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="keyword" class="sr-only">Search</label>
+                            <input class="form-control" id="keyword" name="searchKeyword"
+                                   type="text" value="${searchKeyword}"
+                                   placeholder="keyword...">
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label class="mr-sm-2" class="sr-only">date</label>
 
-                        <div class="input-group" id="inputType">
-                            <fmt:parseDate value="${startDate}" var="startDate"
-                                           pattern="yyyy.MM.dd"
-                                           dateStyle="full"/>
-                            <input id="startDate" name="startDate"
-                                   data-date="<fmt:formatDate value="${startDate}" pattern="yyyy.MM.dd"/>"
-                                   class="form-control" type="text" datepicker
-                                   data-trigger="#show-datepicker1">
-                            <div id="show-datepicker1" class="input-group-append">
+                            <div class="input-group" id="inputType">
+                                <fmt:parseDate value="${startDate}" var="startDate"
+                                               pattern="yyyy-MM-dd"
+                                               dateStyle="full"/>
+                                <input id="startDate" name="startDate"
+                                       value="<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>"
+                                       class="form-control" type="text" datepicker
+                                       data-trigger="#show-datepicker1">
+                                <div id="show-datepicker1" class="input-group-append">
                                 <span class="input-group-text"><i
                                         class="material-icons">&#xE916;</i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label class="mr-sm-2" class="sr-only">~</label>
-                        <div class="input-group" id="inputType">
-                            <fmt:parseDate value="${endDate}" var="endDate" pattern="yyyyMMdd"
-                                           dateStyle="full"/>
-                            <input id="endDate" name="endDate"
-                                   value="<fmt:formatDate value="${endDate}" pattern="yyyy.MM.dd"/>"
-                                   class="form-control" type="text" datepicker
-                                   data-trigger="#show-datepicker2">
-                            <div id="show-datepicker2" class="input-group-append">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label class="mr-sm-2" class="sr-only">~&nbsp;</label>
+                            <div class="input-group" id="inputType">
+                                <fmt:parseDate value="${endDate}" var="endDate"
+                                               pattern="yyyy-MM-dd"
+                                               dateStyle="full"/>
+                                <input id="endDate" name="endDate"
+                                       value="<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>"
+                                       class="form-control" type="text" datepicker
+                                       data-trigger="#show-datepicker2">
+                                <div id="show-datepicker2" class="input-group-append">
                                 <span class="input-group-text"><i
                                         class="material-icons">&#xE916;</i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2">조회</button>
-                </form>
+                        <button type="submit" class="btn btn-primary mb-2">조회</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>업데이트 예약일</th>
-            <th>업데이트 실행일</th>
-            <th>Entity count</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:choose>
-            <c:when test="${paging.finalPageNo == null}">
-                <tr>
-                    <th colspan="8">
-                        조회 할 data가 없습니다.
-                    </th>
-                </tr>
-            </c:when>
-            <c:otherwise>
-                <c:forEach var="data" items="${list}" varStatus="i">
-                    <form id="HISTORY_${i.index}" name="HISTORY_${i.index}"
-                          action="<c:url value="/api/buildView"/>">
-                        <input type="hidden" id="id" name="id"
-                               value="${data.id}"/>
-                    </form>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>업데이트 예약일</th>
+                <th>업데이트 실행일</th>
+                <th>Entity count</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:choose>
+                <c:when test="${paging.finalPageNo == 0}">
                     <tr>
-                        <td><a href="javascript:document.HISTORY_${i.index}.submit();"
-                        >${data.requestAt}</a>
-                        </td>
-                        <td><a
-                        >${data.modelName}</a>
-                        </td>
-                        <td><a
-                        >${data.modelUuid}</a>
-                        </td>
-                        <td><a
-                        >${data.skillName}</a></td>
-                        <td><button type="button" class="btn btn-info"
-                                    onClick="updateConfig(${i.index})">취소
-                        </button>
-                            <button type="button" class="btn btn-info"
-                                    onClick="updateConfig(${i.index})">재예약
-                            </button>
-                        </td>
-
+                        <th colspan="8">
+                            조회 할 data가 없습니다.
+                        </th>
                     </tr>
-                </c:forEach>
-            </c:otherwise>
-        </c:choose>
-        </tbody>
-    </table>
-    <jsp:include page="../common/paging.jsp" flush="true">
-        <jsp:param name="firstPageNo" value="${paging.firstPageNo}"/>
-        <jsp:param name="prevPageNo" value="${paging.prevPageNo}"/>
-        <jsp:param name="startPageNo" value="${paging.startPageNo}"/>
-        <jsp:param name="pageNo" value="${paging.pageNo}"/>
-        <jsp:param name="endPageNo" value="${paging.endPageNo}"/>
-        <jsp:param name="nextPageNo" value="${paging.nextPageNo}"/>
-        <jsp:param name="finalPageNo" value="${paging.finalPageNo}"/>
-    </jsp:include>
-</div>
-<div class="rolling"
-     hidden=""></div>
-<%@ include file="../common/includeBottom.jsp" %>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="data" items="${result}" varStatus="i">
+                        <tr>
+                            <td>
+                                <fmt:formatDate value="${data.createAt}" type="both"
+                                                pattern="yyyy-MM-dd"/>
+                            </td>
+                            <td>
+                                <fmt:formatDate value="${data.excuteAt}" type="both"
+                                                pattern="yyyy-MM-dd"/>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-info"
+                                        onClick="popUpdateEntities(${i.index})">
+                                        ${data.entityCount}
+                                </button>
+                            </td>
+                            <td><c:choose>
+                                <c:when test="${data.statusCode == 'C'}">
+                                    완료
+                                </c:when>
+                                <c:when test="${data.statusCode == 'R'}">
+                                    예약중
+                                </c:when>
+                                <c:when test="${data.statusCode == 'F'}">
+                                    취소
+                                </c:when>
+                            </c:choose>
+                            </td>
+                            <td><c:choose>
+                                <c:when test="${data.statusCode == 'R'}">
+                                    <button type="button" class="btn btn-info"
+                                            onClick="updateConfig(${data.id})">
+                                        취소
+                                    </button>
+                                </c:when>
+                                <c:when test="${data.statusCode == 'F'}">
+                                    <button type="button" class="btn btn-info"
+                                            onClick="updateConfig(${data.id})">
+                                        재예약
+                                    </button>
+                                </c:when>
+                            </c:choose>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+            </tbody>
+        </table>
+        <jsp:include page="../common/paging.jsp" flush="true">
+            <jsp:param name="firstPageNo" value="${paging.firstPageNo}"/>
+            <jsp:param name="prevPageNo" value="${paging.prevPageNo}"/>
+            <jsp:param name="startPageNo" value="${paging.startPageNo}"/>
+            <jsp:param name="pageNo" value="${paging.pageNo}"/>
+            <jsp:param name="endPageNo" value="${paging.endPageNo}"/>
+            <jsp:param name="nextPageNo" value="${paging.nextPageNo}"/>
+            <jsp:param name="finalPageNo" value="${paging.finalPageNo}"/>
+        </jsp:include>
+    </div>
+    <div class="rolling"
+         hidden=""></div>
+    <%@ include file="../common/includeBottom.jsp" %>
 </main>

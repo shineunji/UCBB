@@ -12,10 +12,8 @@
     <meta name="author" content="">
 
     <title>UCBB ADMIN</title>
-    <%--
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-        <script src="/skin/js/datepicker.min.js"></script>
-    --%>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="/skin/js/datepicker.min.js"></script>
 
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <!-- Bootstrap core CSS -->

@@ -1,6 +1,7 @@
 package ai.maum.ucbb.controller;
 
 
+import ai.maum.common.entity.Paging;
 import ai.maum.ucbb.entity.EntitiesEntity;
 import ai.maum.ucbb.entity.SettingsEntity;
 import ai.maum.ucbb.entity.UpdateStatusEntity;
@@ -8,7 +9,9 @@ import ai.maum.ucbb.service.AttributesService;
 import ai.maum.ucbb.service.EntitiesService;
 import ai.maum.ucbb.service.SettingsService;
 import ai.maum.ucbb.service.UpdateStatusService;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -154,10 +157,21 @@ public class AdminController {
 
     try {
       EntitiesEntity param = new EntitiesEntity();
-      param.setSearchKeyword(requestParams.get("searchKeyword"));
+      param.setSearchKeyword(requestParams.get("searchKeyword") == null ? "" : requestParams.get("searchKeyword"));
+      param.setType(requestParams.get("type") == null ? "All" : requestParams.get("type"));
+      param.setPageIndex(requestParams);
 
       Page<EntitiesEntity> result = entitiesService.findEntitiesList(param);
-      model.addAttribute("result", result);
+
+      Paging paging = new Paging();
+      paging.setPageNo(result.getNumber()+1);
+      paging.setPageSize(result.getSize());
+      paging.setTotalCount(Long.valueOf(result.getTotalElements()).intValue());
+
+      model.addAttribute("searchKeyword", requestParams.get("searchKeyword"));
+      model.addAttribute("type", requestParams.get("type"));
+      model.addAttribute("paging", paging);
+      model.addAttribute("result", result.getContent());
     }catch (Exception e){
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
@@ -189,7 +203,7 @@ public class AdminController {
       *  grcp 연동 부분
       * */
 
-      model.addAttribute("result", findUpdateStatusList(requestParams));
+      //model.addAttribute("result", findUpdateStatusList(requestParams));
     }catch (Exception e){
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
@@ -201,8 +215,22 @@ public class AdminController {
   public String eaUpdateStatus(@RequestParam HashMap<String, String> requestParams, Model model) {
     logger.info("======= call request :: /eaUpdateStatus =======");
 
+    String startDate = requestParams.get("startDate");
+    String endDate = requestParams.get("endDate");
+
     try {
-      model.addAttribute("result", findUpdateStatusList(requestParams));
+      Page<UpdateStatusEntity> result = findUpdateStatusList(requestParams);
+
+      Paging paging = new Paging();
+      paging.setPageNo(result.getNumber()+1);
+      paging.setPageSize(result.getSize());
+      paging.setTotalCount(Long.valueOf(result.getTotalElements()).intValue());
+
+      model.addAttribute("searchKeyword", requestParams.get("searchKeyword"));
+      model.addAttribute("startDate", checkEmpty(startDate) ? getTimestamp(-6) : strToTimestamp(startDate));
+      model.addAttribute("endDate", checkEmpty(endDate) ? getTimestamp(0) : strToTimestamp(endDate));
+      model.addAttribute("paging", paging);
+      model.addAttribute("result", result.getContent());
     }catch (Exception e){
       e.printStackTrace();
       model.addAttribute("message", e.getMessage());
@@ -211,10 +239,14 @@ public class AdminController {
   }
 
   public Page<UpdateStatusEntity> findUpdateStatusList(HashMap<String, String> requestParams) {
+    String startDate = requestParams.get("startDate");
+    String endDate = requestParams.get("endDate");
+
     UpdateStatusEntity param = new UpdateStatusEntity();
+    param.setStartDate(checkEmpty(startDate) ? getDate(-6) : strToDate(startDate));
+    param.setEndDate(checkEmpty(endDate) ? getDate(0) : strToDate(endDate));
     param.setSearchKeyword(requestParams.get("searchKeyword"));
-    param.setStartDate(strToDate(requestParams.get("startDate")));
-    param.setEndDate(strToDate(requestParams.get("endDate")));
+    param.setPageIndex(requestParams);
 
     Page<UpdateStatusEntity> result = updateStatusService.findUpdateStatusList(param);
 
@@ -228,6 +260,31 @@ public class AdminController {
       return null;
     }
   }
+
+  public Date getDate(int range) {
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.DATE, range);
+    return cal.getTime();
+  }
+
+  public Timestamp strToTimestamp(String s) {
+    try{
+      return new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(s).getTime());
+    }catch (Exception e){
+      return null;
+    }
+  }
+
+  public Timestamp getTimestamp(int range) {
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.DATE, range);
+    return new Timestamp(cal.getTimeInMillis());
+  }
+
+  public Boolean checkEmpty(Object obj) {
+    return obj == null || "".equals(obj) ? true : false;
+  }
+
 
 
 

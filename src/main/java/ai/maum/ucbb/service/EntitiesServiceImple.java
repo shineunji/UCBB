@@ -14,16 +14,15 @@ public class EntitiesServiceImple implements EntitiesService{
 
   @Override
   public Page<EntitiesEntity> findEntitiesList(EntitiesEntity param) {
-    param.setOrderProperty("entity");
-    param.setOrderDirection("desc");
-
     if("All".equals(param.getType())){
       param.setEntityKeyword(param.getSearchKeyword());
-      param.setAttributeKeyword(param.getAttributeKeyword());
+      param.setAttributeKeyword(param.getSearchKeyword());
     }else if("Entity".equals(param.getType())){
       param.setEntityKeyword(param.getSearchKeyword());
+      param.setAttributeKeyword(null);
     }else if("Attribute".equals(param.getType())){
-      param.setAttributeKeyword(param.getAttributeKeyword());
+      param.setEntityKeyword(null);
+      param.setAttributeKeyword(param.getSearchKeyword());
     }
     return entitiesRepository.findEntitiesList(param.getEntityKeyword(), param.getAttributeKeyword(), param.getPageRequest());
   }

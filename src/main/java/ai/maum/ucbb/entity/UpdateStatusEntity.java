@@ -45,7 +45,7 @@ public class UpdateStatusEntity extends PageParameters implements Serializable{
   private String statusCode;
 
   @OneToMany(mappedBy = "updateStatusId", orphanRemoval = true, cascade = CascadeType.ALL)
-  private List<UpdateEntitiesEntity> UpdateEntitiesEntity;
+  private List<UpdateEntitiesEntity> updateEntitiesEntities;
 
   @Transient
   private Date startDate;

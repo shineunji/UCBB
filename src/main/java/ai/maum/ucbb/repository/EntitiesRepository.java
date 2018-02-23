@@ -11,10 +11,10 @@ public interface EntitiesRepository extends JpaRepository<EntitiesEntity, Intege
 
   @Query(value = "SELECT e "
       + "         FROM EntitiesEntity e"
-      + "         WHERE ((e.entity LIKE CONCAT('%',:entityKeyword,'%') OR :entityKeyword IS NULL)"
-      + "         OR (e.id IN(SELECT a.entityId "
+      + "         WHERE e.entity LIKE CONCAT('%',:entityKeyword,'%')"
+      + "         OR e.id IN(SELECT a.entityId "
       + "                     FROM AttributesEntity a "
-      + "                     WHERE a.attribute LIKE CONCAT('%',:attributeKeyword,'%') OR :attributeKeyword IS NULL)))")
+      + "                     WHERE a.attribute LIKE CONCAT('%',:attributeKeyword,'%'))")
   Page<EntitiesEntity> findEntitiesList(
       @Param("entityKeyword") String entityKeyword,
       @Param("attributeKeyword") String attributeKeyword,
