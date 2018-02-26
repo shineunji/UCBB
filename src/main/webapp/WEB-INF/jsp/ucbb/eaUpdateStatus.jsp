@@ -184,31 +184,31 @@
                                 </button>
                             </td>
                             <td><c:choose>
-                                <c:when test="${data.statusCode == 'C'}">
-                                    완료
-                                </c:when>
-                                <c:when test="${data.statusCode == 'R'}">
-                                    예약중
-                                </c:when>
-                                <c:when test="${data.statusCode == 'F'}">
-                                    취소
-                                </c:when>
-                            </c:choose>
+                                    <c:when test="${data.statusCode == 'C'}">
+                                        완료
+                                    </c:when>
+                                    <c:when test="${data.statusCode == 'R'}">
+                                        예약중
+                                    </c:when>
+                                    <c:when test="${data.statusCode == 'F'}">
+                                        취소
+                                    </c:when>
+                                </c:choose>
                             </td>
                             <td><c:choose>
-                                <c:when test="${data.statusCode == 'R'}">
-                                    <button type="button" class="btn btn-info"
-                                            onClick="updateConfig(${data.id})">
-                                        취소
-                                    </button>
-                                </c:when>
-                                <c:when test="${data.statusCode == 'F'}">
-                                    <button type="button" class="btn btn-info"
-                                            onClick="updateConfig(${data.id})">
-                                        재예약
-                                    </button>
-                                </c:when>
-                            </c:choose>
+                                    <c:when test="${data.statusCode == 'R'}">
+                                        <button type="button" class="btn btn-info"
+                                                onClick="updateConfig(${data.id})">
+                                            취소
+                                        </button>
+                                    </c:when>
+                                    <c:when test="${data.statusCode == 'F'}">
+                                        <button type="button" class="btn btn-info"
+                                                onClick="updateConfig(${data.id})">
+                                            재예약
+                                        </button>
+                                    </c:when>
+                                </c:choose>
                             </td>
                         </tr>
                     </c:forEach>

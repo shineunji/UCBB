@@ -243,8 +243,8 @@ public class AdminController {
     String endDate = requestParams.get("endDate");
 
     UpdateStatusEntity param = new UpdateStatusEntity();
-    param.setStartDate(checkEmpty(startDate) ? getDate(-6) : strToDate(startDate));
-    param.setEndDate(checkEmpty(endDate) ? getDate(0) : strToDate(endDate));
+    param.setStartDate(checkEmpty(startDate) ? getDate(-6, "s") : strToDate(startDate+" 00:00:00"));
+    param.setEndDate(checkEmpty(endDate) ? getDate(0, "e") : strToDate(endDate+" 23:59:59"));
     param.setSearchKeyword(requestParams.get("searchKeyword"));
     param.setPageIndex(requestParams);
 
@@ -255,15 +255,24 @@ public class AdminController {
 
   public Date strToDate(String s) {
     try{
-      return new SimpleDateFormat("yyyy-MM-dd").parse(s);
+      return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(s);
     }catch (Exception e){
       return null;
     }
   }
 
-  public Date getDate(int range) {
+  public Date getDate(int range, String point) {
     Calendar cal = Calendar.getInstance();
     cal.add(Calendar.DATE, range);
+    if("s".equals(point)){
+      cal.set(Calendar.SECOND, 0);
+      cal.set(Calendar.MINUTE, 0);
+      cal.set(Calendar.HOUR, 0);
+    }else if("e".equals(point)){
+      cal.set(Calendar.SECOND, 59);
+      cal.set(Calendar.MINUTE, 59);
+      cal.set(Calendar.HOUR, 23);
+    }
     return cal.getTime();
   }
 
@@ -281,7 +290,7 @@ public class AdminController {
     return new Timestamp(cal.getTimeInMillis());
   }
 
-  public Boolean checkEmpty(Object obj) {
+  public Boolean checkEmpty(String obj) {
     return obj == null || "".equals(obj) ? true : false;
   }
 
