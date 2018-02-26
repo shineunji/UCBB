@@ -243,8 +243,8 @@ public class AdminController {
     String endDate = requestParams.get("endDate");
 
     UpdateStatusEntity param = new UpdateStatusEntity();
-    param.setStartDate(checkEmpty(startDate) ? getDate(-6, "s") : strToDate(startDate+" 00:00:00"));
-    param.setEndDate(checkEmpty(endDate) ? getDate(0, "e") : strToDate(endDate+" 23:59:59"));
+    param.setStartDate(checkEmpty(startDate) ? getDate(-6, "s") : strToDate(startDate, "s"));
+    param.setEndDate(checkEmpty(endDate) ? getDate(0, "e") : strToDate(endDate, "e"));
     param.setSearchKeyword(requestParams.get("searchKeyword"));
     param.setPageIndex(requestParams);
 
@@ -253,8 +253,14 @@ public class AdminController {
     return result;
   }
 
-  public Date strToDate(String s) {
+  public Date strToDate(String s, String point) {
+    String newStr = s;
     try{
+      if("s".equals(point)){
+        s += " 00:00:00";
+      }else if("e".equals(point)){
+        s += " 23:59:59";
+      }
       return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(s);
     }catch (Exception e){
       return null;
